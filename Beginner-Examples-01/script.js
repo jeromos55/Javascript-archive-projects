@@ -43,7 +43,7 @@ const game = {
 
 /*
 -----------------------
-   CODING CHALLENGE
+  CODING CHALLENGE
 -----------------------
 
 We're building a football betting app (soccer for my American friends)! Suppose we get data from a web service about a certain game ('game' variable on next page). In this challenge we're gonna work with that data.
