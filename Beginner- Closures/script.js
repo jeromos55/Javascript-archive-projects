@@ -55,3 +55,50 @@ console.dir(booker);
 
 console.log(secureBooking);
 console.dir(secureBooking);
+
+//-----------
+// Example 01
+//-----------
+
+let f;
+
+const g = function () {
+  const a = 32;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+f(); // f variable was defined outside in the global scope then as we assigned it a function in this the g function so right here at in still closed over the variable environment of the g function.
+console.dir(f); // in the Scopes and in the Closure is b: 32
+
+// re-assign the f function
+h();
+f();
+console.dir(f); // in the Scopes and in the Closure is b: 777
+
+//-----------
+// Example 01
+//-----------
+
+const boardPassengers = function (n, wait) {
+  const preGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers.`);
+    console.log(`There are 3 groups, each with ${preGroup} passengers.`);
+  }, wait * 1000);
+
+  console.log(`Will start boarding in ${wait} seconds`);
+};
+
+boardPassengers(180, 3);
+console.dir(boardPassengers);
