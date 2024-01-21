@@ -32,38 +32,8 @@ const account4 = {
 
 const accounts = [account1, account2, account3, account4];
 
-//-------------------------------------------------
-// Elements
-const labelWelcome = document.querySelector('.welcome');
-const labelDate = document.querySelector('.date');
-const labelBalance = document.querySelector('.balance__value');
-const labelSumIn = document.querySelector('.summary__value--in');
-const labelSumOut = document.querySelector('.summary__value--out');
-const labelSumInterest = document.querySelector('.summary__value--interest');
-const labelTimer = document.querySelector('.timer');
-
-const containerApp = document.querySelector('.app');
-const containerMovements = document.querySelector('.movements');
-
-const btnLogin = document.querySelector('.login__btn');
-const btnTransfer = document.querySelector('.form__btn--transfer');
-const btnLoan = document.querySelector('.form__btn--loan');
-const btnClose = document.querySelector('.form__btn--close');
-const btnSort = document.querySelector('.btn--sort');
-
-const inputLoginUsername = document.querySelector('.login__input--user');
-const inputLoginPin = document.querySelector('.login__input--pin');
-const inputTransferTo = document.querySelector('.form__input--to');
-const inputTransferAmount = document.querySelector('.form__input--amount');
-const inputLoanAmount = document.querySelector('.form__input--loan-amount');
-const inputCloseUsername = document.querySelector('.form__input--user');
-const inputClosePin = document.querySelector('.form__input--pin');
-
-//------------------------------------------------
-
-let arr = ['a', 'b', 'c', 'd', 'e'];
-
 // slice
+let arr = ['a', 'b', 'c', 'd', 'e'];
 console.log('--- slice ---');
 console.log(arr.slice(2));
 console.log(arr.slice(2, 4));
@@ -180,3 +150,82 @@ console.log(currenciesUnique);
 currenciesUnique.forEach((value, key, map) => {
   console.log(`${key}: ${value}`);
 });
+
+// --- map method ---
+console.log('--- map method ---');
+console.log(movements);
+
+const eroToUSD = 1.1;
+const movementsUSDfor = [];
+for (const mov of movements) {
+  movementsUSDfor.push(mov * eroToUSD);
+}
+console.log(movementsUSDfor);
+
+const movementsUSD = movements.map(function (mov) {
+  return mov * eroToUSD;
+});
+console.log(movementsUSD);
+
+const movementsArrow = movements.map((mov) => mov * eroToUSD);
+console.log(movementsArrow);
+
+const movementsDescriptions = movements.map((mov, i, arr) => {
+  // if (mov > 0) {
+  //   return `Movement ${i + 1}: You deposited ${mov}`;
+  // } else {
+  //   return `Movement ${i + 1}: You withdrew ${Math.abs(mov)}`;
+  // }
+  return `Movement ${i + 1}: You ${
+    mov > 3 ? 'deposited' : 'withdrew'
+  } ${Math.abs(mov)}`;
+});
+console.log(movementsDescriptions);
+
+//--- Create username ---
+console.log('--- Create username ---');
+
+const CreateUserName = function (user) {
+  const userName = user
+    .toLowerCase()
+    .split(' ')
+    .map((name) => name[0])
+    .join('');
+  return userName;
+};
+
+console.log(CreateUserName('Steven Thomas Williams'));
+
+//--- Create usernames for accounts array ---
+console.log('--- Create usernames for accounts array ---');
+
+const CreateUserNames = function (accs) {
+  accs.forEach((accs) => {
+    accs.username = accs.owner
+      .toLowerCase()
+      .split(' ')
+      .map((name) => name[0])
+      .join('');
+  });
+};
+CreateUserNames(accounts);
+console.log(accounts);
+
+// --- The filter method ---
+console.log('--- The filter method ---');
+
+const deposit = movements.filter((mov) => mov > 0);
+const withdraw = movements.filter((mov) => mov < 0);
+console.log(movements);
+console.log(deposit);
+console.log(withdraw);
+
+// --- The reduce method ---
+console.log('--- The reduce method ---');
+
+// acc --> accumulator, mov --> movements, i --> index, arr --> array, 0 --> initial value
+const balance = movements.reduce((acc, mov, i, arr) => {
+  console.log(`Iteration ${i}: ${acc}`);
+  return acc + mov;
+}, 0);
+console.log(balance);
