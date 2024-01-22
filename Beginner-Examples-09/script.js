@@ -33,19 +33,18 @@ GOOD LUCK
 */
 
 const calcAverageHumanAge = function (ages) {
-  // const humanAges = ages.map((age) => {
-  //   age <= 2 ? 2 * age : 16 + age * 4;
-  // });
-  const humanAges = ages.map((age) => {
-    if (age <= 2) {
-      return 2 * age;
-    } else {
-      return 16 + age * 4;
-    }
-  });
-  console.log(humanAges);
+  const humanAges = ages.map((age) => (age <= 2 ? 2 * age : 16 + age * 4));
+  const adults = humanAges.filter((age) => age >= 18);
+  const average = adults.reduce((acc, item) => acc + item, 0) / adults.length;
+  return average;
 };
-calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+
+console.log(avg1);
+console.log(avg2);
+
+// --- Cody AI's solvation ---
 
 // const calcAverageHumanAge = (ages) => {
 //   const humanAges = ages.map((age) => {
@@ -58,4 +57,5 @@ calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 //   const adultAges = humanAges.filter((age) => age >= 18);
 //   return adultAges.reduce((total, age) => total + age, 0) / adultAges.length;
 // };
-// calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+// console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
+// console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
