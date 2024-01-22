@@ -155,7 +155,7 @@ currenciesUnique.forEach((value, key, map) => {
 console.log('--- map method ---');
 console.log(movements);
 
-const eroToUSD = 1.1;
+let eroToUSD = 1.1;
 const movementsUSDfor = [];
 for (const mov of movements) {
   movementsUSDfor.push(mov * eroToUSD);
@@ -232,15 +232,25 @@ console.log('--- The reduce method ---');
 // --- sum values ---
 let balance = 0;
 balance = movements.reduce((acc, mov, i, arr) => acc + mov, 0);
-console.log(balance);
+console.log('sum values: ' + balance);
 
 let balance2 = 0;
 for (const mov of movements) balance2 += mov;
-console.log(balance2);
+console.log('sum values: ' + balance2);
 
 // --- max value ---
 const max = movements.reduce((acc, mov) => {
   if (acc > mov) return acc;
   else return mov;
 }, movements[0]);
-console.log(max);
+console.log('max values: ' + max);
+
+// --- chaining methods ---
+console.log('--- chaining methods ---');
+
+eroToUSD = 1.1;
+const totalDepositsUsd = movements
+  .filter((mov) => mov < 0)
+  .map((mov) => mov * eroToUSD)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log('total deposit in usd: ' + totalDepositsUsd);
