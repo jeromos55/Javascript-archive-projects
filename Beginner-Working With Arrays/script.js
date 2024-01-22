@@ -224,8 +224,23 @@ console.log(withdraw);
 console.log('--- The reduce method ---');
 
 // acc --> accumulator, mov --> movements, i --> index, arr --> array, 0 --> initial value
-const balance = movements.reduce((acc, mov, i, arr) => {
-  console.log(`Iteration ${i}: ${acc}`);
-  return acc + mov;
-}, 0);
+// const balance = movements.reduce((acc, mov, i, arr) => {
+//   console.log(`Iteration ${i}: ${acc}`);
+//   return acc + mov;
+// }, 0);
+
+// --- sum values ---
+let balance = 0;
+balance = movements.reduce((acc, mov, i, arr) => acc + mov, 0);
 console.log(balance);
+
+let balance2 = 0;
+for (const mov of movements) balance2 += mov;
+console.log(balance2);
+
+// --- max value ---
+const max = movements.reduce((acc, mov) => {
+  if (acc > mov) return acc;
+  else return mov;
+}, movements[0]);
+console.log(max);
