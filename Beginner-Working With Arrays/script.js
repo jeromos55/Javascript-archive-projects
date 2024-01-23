@@ -250,7 +250,18 @@ console.log('--- chaining methods ---');
 
 eroToUSD = 1.1;
 const totalDepositsUsd = movements
-  .filter((mov) => mov < 0)
+  .filter((mov) => mov > 0)
   .map((mov) => mov * eroToUSD)
   .reduce((acc, mov) => acc + mov, 0);
 console.log('total deposit in usd: ' + totalDepositsUsd);
+
+// --- find method ---
+console.log('--- find method ---');
+
+const firstWithdrawal = movements.find((mov) => mov < 0);
+console.log(movements);
+console.log(firstWithdrawal);
+
+console.log(accounts);
+const account = accounts.find((acc) => acc.owner === 'Jessica Davis');
+console.log(account);
