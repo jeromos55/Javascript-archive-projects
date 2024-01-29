@@ -266,7 +266,42 @@ console.log(accounts);
 const account = accounts.find((acc) => acc.owner === 'Jessica Davis');
 console.log(account);
 
-// ---------------------------
-console.log('-----------------------');
+// --- some and every
+console.log('--- some and every ---');
 console.log(movements);
+
+// quality
 console.log(movements.includes(-130));
+console.log(movements.some((mov) => mov === -130));
+
+// some condition
+console.log(movements.some((mov) => mov > 0));
+
+// every
+console.log(movements.every((mov) => mov > 0));
+// false because some movements are negative [200, 450, -400, 3000, -650, -130, 70, 1300]
+console.log(account4.movements.every((mov) => mov > 0));
+// true because all movements are positive [430, 1000, 700, 50, 90]
+
+// separate callback
+let deposit2 = (mov) => mov < 0;
+console.log(movements.some(deposit2));
+console.log(movements.every(deposit2));
+console.log(movements.filter(deposit2));
+
+deposit2 = (mov) => mov > 0;
+console.log(movements.some(deposit2));
+console.log(movements.every(deposit2));
+console.log(movements.filter(deposit2));
+
+// flat and flatMap
+console.log('--- flat and flatMap ---');
+// the flat method only goes one level deep when flattening the array
+const arr3 = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr3.flat()); // 1 level deep
+
+const arrDeep = [[1, [2, 3]], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(1)); // 1 level deep
+
+const arrDeep2 = [[1, [2, 3]], [4, [5, 6]], 7, 8];
+console.log(arrDeep2.flat(2)); // 2 levels deep
