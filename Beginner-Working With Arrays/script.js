@@ -265,3 +265,8 @@ console.log(firstWithdrawal);
 console.log(accounts);
 const account = accounts.find((acc) => acc.owner === 'Jessica Davis');
 console.log(account);
+
+// ---------------------------
+console.log('-----------------------');
+console.log(movements);
+console.log(movements.includes(-130));
