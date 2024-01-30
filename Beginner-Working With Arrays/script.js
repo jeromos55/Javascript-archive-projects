@@ -315,6 +315,42 @@ console.log(overallBalance);
 
 // flatMap
 const overallBalance2 = accounts
-  .flatMap((acc) => acc.movements)
+  .flatMap((acc) => acc.movements) // map and flat at the same time
   .reduce((acc, mov) => acc + mov, 0);
 console.log(overallBalance2);
+
+// sorting arrays
+console.log('--- sorting arrays ---');
+
+// strings
+const letters = ['j', 'z', 'a', 'm'];
+console.log(letters);
+console.log(letters.sort()); // this method modifies the original array
+console.log(letters);
+
+// numbers
+console.log(movements.sort());
+
+// the correct number sort method
+
+// ascending order
+// return < 0, A, B
+// return > 0, B, A
+movements.sort((a, b) => {
+  if (a > b) return 1;
+  if (a < b) return -1;
+});
+// or shortly
+console.log(movements.sort((a, b) => a - b));
+console.log(movements);
+
+// descending order
+// return < 0, A, B (keep order)
+// return > 0, B, A (switch order)
+movements.sort((a, b) => {
+  if (a > b) return -1;
+  if (a < b) return 1;
+});
+// or shortly
+console.log(movements.sort((a, b) => b - a));
+console.log(movements);
