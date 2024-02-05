@@ -354,3 +354,64 @@ movements.sort((a, b) => {
 // or shortly
 console.log(movements.sort((a, b) => b - a));
 console.log(movements);
+
+// creating and filling arrays
+console.log('--- creating and filling arrays ---');
+
+// empty array + fill method
+console.log([1, 2, 3, 4, 5, 6, 7]);
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+const x = new Array(7);
+console.log(x);
+console.log(x.map(() => 5));
+
+console.log(x.fill(1));
+console.log(x.fill(9, 3, 5));
+
+// array from
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z);
+
+// array method practice
+
+// 1.
+console.log('--- array method practice ---');
+const bankDepositSum = accounts
+  .map((acc) => acc.movements)
+  .flat()
+  .filter((mov) => mov > 0)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(bankDepositSum);
+
+// 2.
+let numDeposit1000 = accounts
+  .flatMap((acc) => acc.movements)
+  .filter((mov) => mov >= 1000).length;
+console.log(numDeposit1000);
+
+numDeposit1000 = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce((count, cur) => (cur >= 1000 ? count + 1 : count), 0);
+console.log(numDeposit1000);
+
+// 3.
+
+// prefixed ++ operator
+console.log('--- prefixed ++ operator ---');
+numDeposit1000 = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce((count, cur) => (cur >= 1000 ? count++ : count), 0); // the count always return 0
+console.log(numDeposit1000);
+
+let a = 10;
+console.log(a++); // first print a after increment a this is because the above code is return 0
+console.log(a); // second print a
+
+numDeposit1000 = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0); // first increment count and then return count
+console.log(numDeposit1000);
