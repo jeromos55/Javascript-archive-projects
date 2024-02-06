@@ -376,9 +376,10 @@ const z = Array.from({ length: 7 }, (_, i) => i + 1);
 console.log(z);
 
 // array method practice
+console.log('--- array method practice ---');
 
 // 1.
-console.log('--- array method practice ---');
+console.log('--- 1 ---');
 const bankDepositSum = accounts
   .map((acc) => acc.movements)
   .flat()
@@ -388,6 +389,7 @@ const bankDepositSum = accounts
 console.log(bankDepositSum);
 
 // 2.
+console.log('--- 2 ---');
 let numDeposit1000 = accounts
   .flatMap((acc) => acc.movements)
   .filter((mov) => mov >= 1000).length;
@@ -399,6 +401,36 @@ numDeposit1000 = accounts
 console.log(numDeposit1000);
 
 // 3.
+console.log('--- 3 ---');
+const { deposits, withdrawals } = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      //   cur > 0 ? (sums.deposit += cur) : (sums.withdrawal += cur); // this have a duplicate code
+      sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+console.log(deposits, withdrawals);
+
+// 4.
+// This is a nice title. --> This Is a Nice Title
+console.log('--- 4 ---');
+const convertTitleCase = function (title) {
+  const capitalize = (str) => str[0].toUpperCase() + str.slice(1);
+  const exceptions = ['a', 'an', 'the', 'but', 'and', 'or', 'on', 'in', 'with'];
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map((word) => (exceptions.includes(word) ? word : capitalize(word)))
+    .join(' ');
+  return capitalize(titleCase);
+};
+
+console.log(convertTitleCase('This is a nice title.'));
+console.log(convertTitleCase('This is a LONG title but not too long.'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE'));
 
 // prefixed ++ operator
 console.log('--- prefixed ++ operator ---');
