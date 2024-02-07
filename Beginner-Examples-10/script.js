@@ -90,3 +90,41 @@ console.log(
 
 // 3.
 console.log('--- 3 ---');
+const ownersEatTooMuch = dogs
+  .filter((dog) => dog.curFood > dog.recFood)
+  .flatMap((dog) => dog.owners);
+console.log(ownersEatTooMuch);
+
+const ownersEatTooLittle = dogs
+  .filter((dog) => dog.curFood < dog.recFood)
+  .flatMap((dog) => dog.owners);
+console.log(ownersEatTooLittle);
+
+// 4.
+console.log('--- 4 ---');
+// "Matilda and Alice and Bob's dogs eat too much!" and "Sarah and John and Michael's dogs eat too little!"
+
+console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much!`);
+console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat too little!`);
+
+// 5.
+console.log('--- 5 ---');
+console.log(dogs.some((dog) => dog.curFood === dog.recFood));
+
+// 6.
+console.log('--- 6 ---');
+// recommended portion means: current > (recommended * 0.90) && current < (recommended * 1.10).
+const checkEatingOkey = (dog) =>
+  dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1;
+
+console.log(dogs.some(checkEatingOkey));
+
+// 7.
+console.log('--- 7 ---');
+console.log(dogs.filter(checkEatingOkey));
+
+// 8.
+console.log('--- 8 ---');
+const dogsSorted = dogs.slice().sort((a, b) => a.recFood - b.recFood);
+
+console.log(dogsSorted);
