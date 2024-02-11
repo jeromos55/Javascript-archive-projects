@@ -201,3 +201,14 @@ console.log(Date.now());
 
 future.setFullYear(2040);
 console.log(future);
+console.log(+future);
+
+const calcDaysPassed = (date1, date2) =>
+  (date2 - date1) / (1000 * 60 * 60 * 24); // in milliseconds, in seconds, in minutes, in hours ==> days
+
+const day1 = calcDaysPassed(new Date(2037, 3, 14), new Date(2037, 3, 24));
+const day2 = calcDaysPassed(new Date(2037, 3, 24), new Date(2037, 3, 14));
+const day3 = Math.abs(
+  calcDaysPassed(new Date(2037, 3, 24), new Date(2037, 3, 14))
+);
+console.log(day1, day2, day3);
