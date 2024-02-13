@@ -13,10 +13,12 @@ const account1 = {
     '2020-01-28T09:15:04.904Z',
     '2020-04-01T10:17:24.185Z',
     '2020-05-08T14:11:59.604Z',
-    '2020-07-26T17:01:17.194Z',
-    '2020-07-28T23:36:17.929Z',
-    '2020-08-01T10:51:36.790Z',
+    '2024-02-10T17:01:17.194Z',
+    '2024-02-12T12:36:17.929Z',
+    '2024-02-13T12:36:17.929Z',
   ],
+  currency: 'USD',
+  locale: 'en-US', // de-DE, en-US, es-ES, fr-FR, it-IT, pt-PT, ru-RU, zh-CN,
 };
 
 const account2 = {
@@ -34,6 +36,8 @@ const account2 = {
     '2020-07-28T23:36:17.929Z',
     '2020-08-01T10:51:36.790Z',
   ],
+  currency: 'GBP',
+  locale: 'en-GB', // de-DE, en-US, es-ES, fr-FR, it-IT, pt-PT, ru-RU, zh-CN
 };
 
 const account3 = {
@@ -51,10 +55,12 @@ const account3 = {
     '2020-06-25T18:49:59.371Z',
     '2020-07-26T12:01:20.894Z',
   ],
+  currency: 'EUR',
+  locale: 'de-DE', // de-DE, en-US, es-ES, fr-FR, it-IT, pt-PT, ru-RU, zh-CN
 };
 
 const account4 = {
-  owner: 'Sarah Smith',
+  owner: 'Sára Kovács',
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
   pin: 4444,
@@ -68,6 +74,8 @@ const account4 = {
     '2020-06-25T18:49:59.371Z',
     '2020-07-26T12:01:20.894Z',
   ],
+  currency: 'HUF',
+  locale: 'hu-HU', // de-DE, en-US, es-ES, fr-FR, it-IT, pt-PT, ru-RU, zh-CN
 };
 
 const accounts = [account1, account2, account3, account4];
@@ -102,19 +110,23 @@ const inputClosePin = document.querySelector('.form__input--pin');
 //---------------------------------------------
 // BANKIST APP
 
-const formatMovementDate = function (date) {
+const formatMovementDate = function (date, locale) {
   const calcDaysPassed = (date1, date2) =>
     Math.round(Math.abs((date2 - date1) / (1000 * 60 * 60 * 24)));
 
   const daysPassed = calcDaysPassed(new Date(), date);
-  console.log(daysPassed);
 
-  const now = new Date();
-  const day = `${date.getDate()}`.padStart(2, 0);
-  const month = `${date.getMonth() + 1}`.padStart(2, 0);
-  const year = now.getFullYear();
+  if (daysPassed === 0) return 'Today';
+  if (daysPassed === 1) return 'Yesterday';
+  if (daysPassed <= 7) return `${daysPassed} days ago`;
 
-  return `${day}/${month}/${year}`;
+  // const now = new Date();
+  // const day = `${date.getDate()}`.padStart(2, 0);
+  // const month = `${date.getMonth() + 1}`.padStart(2, 0);
+  // const year = date.getFullYear();
+
+  // return `${day}/${month}/${year}`;
+  return new Intl.DateTimeFormat(locale).format(date);
 };
 
 const displayMovements = function (acc, sort = false) {
@@ -129,7 +141,7 @@ const displayMovements = function (acc, sort = false) {
     const isEven = i % 2 === 0 ? 'background-color:rgb(245,245,245);' : '';
 
     const date = new Date(acc.movementsDates[i]);
-    const displayDate = formatMovementDate(date);
+    const displayDate = formatMovementDate(date, acc.locale);
 
     const html = `
     <div class="movements__row"  style=${isEven}>
@@ -207,13 +219,19 @@ btnLogin.addEventListener('click', function (e) {
     containerApp.style.opacity = 100;
 
     const now = new Date();
-    const day = `${now.getDate()}`.padStart(2, 0);
-    const month = `${now.getMonth() + 1}`.padStart(2, 0);
-    const year = now.getFullYear();
-    const hour = `${now.getHours()}`.padStart(2, 0);
-    const min = `${now.getMinutes()}`.padStart(2, 0);
-
-    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      day: 'numeric',
+      month: 'numeric', // long, 2-digit
+      year: 'numeric',
+      // weekday: 'long', // 2-digit
+    };
+    // const locale = navigator.language;
+    labelDate.textContent = new Intl.DateTimeFormat(
+      currentAccount.locale, // locale
+      options
+    ).format(now);
 
     // clear input field
     inputLoginUsername.value = inputLoginPin.value = '';
