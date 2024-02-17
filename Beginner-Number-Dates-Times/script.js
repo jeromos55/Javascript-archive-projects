@@ -212,3 +212,23 @@ const day3 = Math.abs(
   calcDaysPassed(new Date(2037, 3, 24), new Date(2037, 3, 14))
 );
 console.log(day1, day2, day3);
+
+// --- setTimeout ---
+console.log('--- setTimeout ---');
+
+const ingredients = ['olives', 'spinach'];
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => {
+    console.log(`Here is your pizza ${ing1} ${ing2}🍕`);
+  },
+  3000,
+  ...ingredients
+);
+console.log('Waiting ....');
+
+if (ingredients.includes('potato')) clearTimeout(pizzaTimer);
+
+// setInterval(() => {
+//   const now = new Date();
+//   console.log(now);
+// }, 1000);
